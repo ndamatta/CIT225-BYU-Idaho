@@ -1,3 +1,4 @@
 # CIT225-BYU-Idaho
-[CIT225] Database Design and Develop
-🔧 under construction! better description coming soon...
+[CIT225] Database Design and Develop<br>
+🔧 under construction!<br>
+better description coming soon...
