@@ -1,0 +1,14 @@
+I have already installed the MySQL database and gained proficiency in creating a database and populating it using the CLI.
+
+Based on my experience and research findings, using the MySQL command line shell offers significant benefits that can improve the productivity of software engineers and database administrators.
+First, it provides efficiency and speed. For example, it allows you to run queries, perform administrative tasks, and manage database structures directly from the command line, without the need to navigate through GUIs in IDEs. This workflow improves efficiency and saves time.
+
+Additionally, the CLI supports scripting and automation. Scripts and batch files can be used to automate repetitive tasks such as data migrations, backups, and routine maintenance, reducing just manual effort and the risk of human error. This results in a more reliable and consistent database management process.
+
+Additionally, using the MySQL CLI promotes a deeper understanding of SQL, a fundamental skill for working with databases. It encourages hands-on SQL query writing experience, leading to a more comprehensive understanding of SQL syntax and best practices.
+
+Overall, there are 3 big differences between using an IDE and the CLI:
+
+Interface: CLI relies on text-based commands and scripting, while IDEs provide a graphical interface with visual tools for interaction, making it more easy to use for visualizations and new users.
+Resource Efficiency: The CLI is generally more resource-efficient, consuming fewer system resources, The IDEs can consume more resources due to the graphics.
+Functionality: The CLI allows for advanced scripting and automation, while IDEs often have limited support for these capabilities.
