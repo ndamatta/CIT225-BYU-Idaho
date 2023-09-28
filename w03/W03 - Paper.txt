@@ -1,0 +1,59 @@
+INTRODUCTION:
+Based on my research, the WHERE clause is a crucial component, offering the power to go through vast datasets and retrieve the specific information you seek. It accomplishes this task through the use of comparison operators, which are essentially tools or instructions that help you filter the data intelligently. Think of these operators as the selectors, they determine which rows from your database will make it into the final result set. Understanding these operators is fundamental to becoming proficient in SQL.
+
+A WHERE clause may contain one or more conditions, separated by the operators AND and OR.
+Example: WHERE first_name = 'Juan' AND last_name = 'Perez';
+If our where clause includes three or more conditions, we should use parentheses to make the code clear
+Example: WHERE (first_name = 'Jhon' OR last_name = 'Giaccone') AND dob > '2005-02-01';
+
+NOT OPERATOR:
+This operator works as a exclusion operator; it helps you find and filter out rows that do not meet a specified condition. When you combine WHERE with NOT, you instruct the database to exclude rows that would typically match the given condition.
+For example, if you want to identify all employees who are not 'Managers,' you can use the WHERE NOT operator in combination with the equality operator
+Example:
+WHERE NOT job_title = 'Manager' (Will retrieve all employees without a title of Manager / Will exclude Manager employees)
+
+EQUALITY OPERATORS:
+One of the main comparison operators is the equality operator, represented by the symbol "=". This operator works as a data matchmaker, pointing rows where a particular column's value perfectly aligns with what you specify. For example, if you want to identify all employees with the job title 'Manager' or customers with a specific ID number, the equality operator helps you do just that by comparing values precisely.
+Examples: 
+WHERE job_title = 'Manager';
+WHERE customer_id = 20;
+
+INEQUALITY OPERATORS:
+On the other side, we have inequality operators such as "<>" or "!=". These operators works as filters, excluding rows that don't meet specific criteria. For example, when you aim to locate products that are not priced at $100, inequality operators like "<>" enable you to filter out those items that don't fit the query, leaving you with the rest.
+Examples:
+WHERE product_price != 100; (Will retrieve all prices different than $100)
+
+RANGE OPERATORS:
+Also, another set of useful comparison operators includes the range operators, which involve "<," ">", "<=," or ">=" symbols. These operators establish boundaries and are particularly handy when you need to filter data within a specified range. For example, you can use the greater-than operator (">") to identify all orders with a total cost greater than $500, filtering your data based on price.
+Examples:
+WHERE total_cost > 500; (Will retrieve all orders with a total cost greater than $500)
+WHERE total_cost >= 100 (Will retrieve all orders with a total cost grater or equal to $100)
+
+When we have both an upper and lower limit for the range, we may choose to use a single condition that utilizes the BETWEEN operator.
+Example:
+WHERE total_cost BETWEEN 100 AND 1500;
+We should always specify the lower number first, so it does not raise an empty set.
+Also, it works on string ranges.
+Example:
+WHERE last_name BETWEEN 'FA' AND 'FR';
+
+MEMBERSHIP CONDITIONS:
+Membership conditions, including IN, ANY, SOME, ALL, and NOT IN, are tools for filtering data based on sets of values. These conditions enable you to compare a column's value with a set of values, often represented as a list or a subquery
+
+The IN operator checks if a column's value matches any value in a specified list. For example, you can use it to find products with specific IDs.
+Example: WHERE product_id IN (1, 2, 3).
+
+NOT IN is the negation of the IN operator, excluding rows where a column's value matches any value in a specified list.
+Example: WHERE product_id NOT IN (1, 2, 3)
+
+
+SUBQUERIES:
+Subqueries are queries within queries, allowing you to perform data retrieval by embedding one SELECT statement within another. For example we could execute a subquery against the film table, searching for the films that contains the word 'pet' anywhere in its title.
+Example:
+SELECT title, rating
+FROM film
+WHERE rating IN (SELECT rating FROM film WHERE title LIKE '%PET%');
+
+WILDCARDS:
+REGEXP:
+NULL:
