@@ -55,5 +55,13 @@ FROM film
 WHERE rating IN (SELECT rating FROM film WHERE title LIKE '%PET%');
 
 WILDCARDS:
+Wildcards '_' and '%' are powerful tools for text matching. The underscore matches a single character, while the percent sign % matches any number of characters.
+Examples: WHERE first_name LIKE 'J%SON'; // WHERE first_name LIKE 'C_L';
 REGEXP:
+REGEXP, or regular expressions, offer advanced pattern matching.
+Example: WHERE product_code REGEXP '^[A-Za-z0-9]+$';
+
 NULL:
+NULL means the absence of a value. For example, if you have a table of customer records and some customers haven't provided their email addresses, the corresponding cells for those customers would typically contain NULL values.
+We can check and retrieve rows with a NULL value with the following example:
+WHERE email IS NULL;
