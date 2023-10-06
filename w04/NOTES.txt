@@ -1,0 +1,6 @@
+BASIC JOINS:
+- Used to combine rows from multiple tables
+. The JOIN clause is used with the FROM clause
+- Requires a common key between two tables
+- Generally a primary to foreign key relationship
+- An INNER JOIN requires a matching value from each table
