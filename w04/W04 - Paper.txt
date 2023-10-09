@@ -1,0 +1,78 @@
+First of all, redundant data refers to duplicate or unnecessary information in the database tables, and it has negative impact, such as increasing storage requirements and potential inconsistencies in the data. Understanding redundant data is crucial for maintaining data integrity and optimizing query performance.
+
+Equi-join statements are used to combine rows from different tables based on matching values in specified columns. Redundant data in this context can lead to incorrect results or inflated result sets. To delete redundancy, it's essential to normalize the database, which involves breaking down tables into smaller, related tables and establishing relationships through foreign keys.
+Also, we can apply filters to the data after joining the tables (WHERE clauses). And we can use primary key columns in the join.
+For example:
+SELECT first_name, city_name
+FROM customer c
+INNER JOIN address a
+ON c.customer_id = a.customer_id
+WHERE first_name = 'Jhon'
+
+In this example we are retrieving matching rows between two normalized tables, customer and address, using a primary key. If they match, we are filtering the data retrieved to only bring rows where the first_name of the customer is Jhon.
+
+Redundant data can be in subqueries if they are not properly structured. It's important to design subqueries that fetch only the necessary data and avoid retrieving redundant records, as it can impact query performance and result accuracy.
+This is an example of a good subquery execution:
+SELECT c.first_name, c.last_name, addr.address, addr.city
+FROM customer c
+INNER JOIN
+(SELECT a.address_id, a.address, ct.city
+FROM address a
+INNER JOIN city ct
+ON a.city_id = ct.city_id
+WHERE a.district = 'California'
+) addr
+ON c.address_id = addr.address_id;
+
+Using the sakila database, this will return the first and last name along with the address and city of all customers living in California
+
+Table aliases are very useful, they can help you by making easier the process of referenciating a table.
+For example, we can shorten the table 'customer' to a 'c', making it easier to read and code.
+FROM customer c 
+
+They also play a crucial role in reducing redundancy when self-joining tables, as they allow you to reference the same table with different aliases, effectively creating two separate instances of the same table for comparison.
+Let's take this example from the excercises of this week:
+SELECT a1.address addr1, a2.address addr2, a1.city_id
+FROM address a1
+INNER JOIN address a2
+ON a1.city_id = a2.city_id
+AND a1.address < a2.address;
+
+Here we are joining the same table, but using alias to reference different instances of the table. By doing this, we can retrieve all addresses that are in the same city.
+
+
+
+-------------
+Redundant data in a database means having the same or unnecessary information in its tables. This can be a problem because it takes up extra space and can lead to inconsistencies in the data. It is important to understand this issue to keep data accurate and optimize queries.
+
+When we want to combine information from different tables based on matching values in specific columns, we use something called "equi-join statements." If there is redundant data in this situation, it can cause errors or give us repeated data. To fix this, we need to "normalize" the database. That means breaking tables into smaller ones and linking them together with foreign keys.
+
+We can also narrow down the data we get from joined tables by using filters (like WHERE clauses) and focusing on primary key columns.
+In this example, we are getting matching rows from two normalized tables, customer and address, using a primary key. Then, we are only keeping rows where the customer's first name is 'John.'
+SELECT first_name, city_name
+FROM customer c
+INNER JOIN address a
+ON c.customer_id = a.customer_id
+WHERE first_name = 'John';
+
+
+Redundant data can be a problem in subqueries if they are not structured well. It is important to design subqueries that only get the data we need. Otherwise, it can slow down our queries and make the results less accurate.
+In this example, we are using the sakila database to get the first and last names, along with the address and city, of all customers living in California.
+SELECT c.first_name, c.last_name, addr.address, addr.city
+FROM customer c
+INNER JOIN
+(SELECT a.address_id, a.address, ct.city
+FROM address a
+INNER JOIN city ct
+ON a.city_id = ct.city_id
+WHERE a.district = 'California'
+) addr
+ON c.address_id = addr.address_id;
+
+Aliases also help reduce redundancy when we are joining a table with itself (self-join). We can use different aliases to compare the same table in two different instances.
+In this example, we are using aliases to reference two different parts of the same table and find addresses in the same city.
+SELECT a1.address addr1, a2.address addr2, a1.city_id
+FROM address a1
+INNER JOIN address a2
+ON a1.city_id = a2.city_id
+AND a1.address < a2.address;
