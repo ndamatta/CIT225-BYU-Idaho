@@ -1,0 +1,40 @@
+INTRODUCTION:
+Based on my research and experience, combining and gathering information from different sources is something that we do in our daily when working with MySQL. In this case, joining different sets from tables to have certain information.
+In these last weeks, we learned two useful ways to achieve this goal,joining different sets of information, using set operators or using join operators.
+
+JOIN OPERATORS:
+Joins are the tools we use to bring together data from multiple tables. Join operators, like INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN, help establish connections between these tables. They work by matching rows based on specific criteria, such as common columns or keys. For example, an INNER JOIN only returns rows that have matches in both tables, while a LEFT JOIN retains all rows from the left table and adds data from the right table where there's a match.
+
+In this example, working with the sakila database, we are joining the tables 'customer' and 'address'. For example, if I would need a report to show me the first name and last name of the customers living in California, I must need to join those two tables in some way.
+
+SELECT first_name, last_name, district
+FROM customer c
+INNER JOIN address a
+ON c.address_id = a.address_id
+WHERE district LIKE 'California';
+
+In this query, we are joining the customer and address table by using the key address_id. Then, we filter out the result set by only retrieving the people that live in California.
+
+SET OPERATORS:
+Sets are a way to manipulate and combine data from different sources. This is similar to conducting operations on sets in mathematics. Set operators, including UNION, INTERSECT, and EXCEPT, let us perform actions on result sets, such as combining them or finding differences. UNION combines data from different sources into one result set. INTERSECT helps you identify overlapping data between two sets.
+EXCEPT is used to find the unique elements in one set compared to another, which is useful for comparing or subtracting data.
+Sets provide a flexible approach to processing data by applying set theory principles to our datasets.
+
+In this example, working with the sakila database, we are retrieving the first and last name from the customer table and actor table, naming them in the column 'type'
+
+SELECT 'CUST' type, c.first_name, c.last_name
+FROM customer c
+UNION
+SELECT 'ACTR' type, a.first_name, a.last_name
+FROM actor a;
+
+If we want to exclude the intersection with the combination of set operators, we can remake the query following this pattern:
+(A union B) except (A intersect B)
+The version 8.0 of MySQL does not implement the intersect and except operators
+
+THE DIFFERENCE:
+The main difference between joins and sets is in how they bring together data: 
+Joins focus on connecting tables by matching common columns.
+Sets use set operators to manipulate entire result sets.
+While joins maintain data relationships and integrity, sets offer flexibility in combining data from different sources, often through set theory principles, making them suitable for many data manipulation tasks.
+
