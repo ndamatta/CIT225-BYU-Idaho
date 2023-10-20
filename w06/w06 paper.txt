@@ -1,0 +1,34 @@
+String Generation with CONCAT: The CONCAT function is a versatile tool for generating strings by combining multiple string values. This feature is immensely helpful in real business scenarios where you need to create dynamic messages, labels, or construct custom queries.
+Example: SELECT CONCAT('Hello, ', 'World!') AS Greeting; OR SELECT CONCAT(fname, ' ',lname) AS Fullname
+
+Escape Mechanisms for Apostrophes: MySQL provides two escape mechanisms to handle single quotes within strings: using two consecutive single quotes ('') or employing the backslash (\) before the apostrophe ('').
+Example: SELECT 'This string didn''t work, but it does now' AS Text;
+
+Importance of QUOTE: The QUOTE function is a valuable asset when querying data that has already been inserted or updated in the database. It surrounds a string with single quotes and adds escapes, ensuring data integrity and making it suitable for immediate use in SQL queries.
+Example: SELECT QUOTE('This is a quoted string') AS Quoted;
+
+String Manipulation Functions: SQL offers many string manipulation functions like LENGTH, SUBSTRING, LOCATE, POSITION, STUFF, REPLACE, and INSERT. These functions allow you to handle substrings within text effectively.
+In this example, I'm manipulating the string 'Hello, World', finding the lenght of the string, finding a substring in a certain location, and finding where a word is located.
+SELECT
+   LENGTH('Hello, World') StringLength,
+   SUBSTRING('Hello, World', 1, 5) Substring,
+   LOCATE('World', 'Hello, World') Position;
+
+Arithmetic Functions: MySQL's arithmetic functions enable you to perform calculations on data, turning raw information into actionable insights.You can perform calculations on data, creating new columns with results in rows. Of course, in the following, you could replace the numbers by data from different rows.
+Example: SELECT
+   POW(10,2) AS Power,
+   10 + 5 AS Addition,
+   20 - 8 AS Subtraction,
+   4 * 6 AS Multiplication,
+   24 / 3 AS Division;
+
+Format Masks for Date Components: In SQL, format masks constructed with date format components, such as '%Y', '%m', and '%d' (as seen in Table 7-4), enable the conversion of date strings to proper date formats and vice versa.
+Example: SELECT
+   DATE_FORMAT(NOW(), '%Y-%m-%d') AS FormattedDate,
+   STR_TO_DATE('2023-10-20', '%Y-%m-%d') AS ParsedDate;
+
+
+
+
+
+
