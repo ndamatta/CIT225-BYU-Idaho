@@ -1,0 +1,31 @@
+EXPLICIT VS IMPLICIT GROUPS:
+There are two basic ways to group data: implicit and explicit grouping. Implicit grouping is when you don't specify what to group by, so the system treats all the data as one big group. Explicit grouping is when you specify which columns to group by.
+Examples:
+Implicit: SELECT SUM(amount) AS 'Total Payments' 
+FROM payment;
+- We are suming all the payment's amount grouping them all in one big group (total payments)
+
+Explicit:
+SELECT customer_id, SUM(amount) AS 'Total Payments'
+FROM payment
+GROUP BY customer_id;
+- We are suming all the payment's per customer, adding a GROUP BY clause.
+
+DISTINCT VALUES:
+Counting distinct values only counts each unique entry once, which is great for avoiding double counting. Counting non-distinct values counts everything, including duplicates.
+Example:
+SELECT DISTINCT amount
+FROM payment;
+- This will only count unique values. Retrieving only 19 rows from the payment table. Without using DISTINCT it would retrieve 1000 rows.
+
+EXPRESSIONS INSIDE AGG FUNCTIONS:
+We can use expressions in aggregation functions. This means you can do more than just simple counts or sums. You can create custom calculations or functions to analyze the data in a more deeply way.
+Example:
+SELECT MAX(datediff(return_date,rental_date))
+FROM rental;
+- With this query we are calculating the difference in days between the return and rental date, and then finding the highest value.
+
+HASTA ACA!!
+Handling null values is also important. When you count without null values, any row with a null entry gets left out of the calculation. So, it's critical to decide whether you want to include or exclude nulls based on what your analysis requires.
+
+Finally, the choice between single and multiple column grouping is all about how detailed you want your analysis to be. Single column grouping gives a high-level view, while multiple column grouping offers a more detailed look by considering combinations of attributes.
