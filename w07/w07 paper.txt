@@ -51,6 +51,15 @@ GROUP BY actor_id;
 - In this example, we want to find the number of films associated with each actor. So, we are displaying all actors. Then, we are grouping each actor with their total films. Ex. actor 1 has been in 19 films.
 
 Multi-column grouping:
-Maybe we want to generate groups that span more than one column, to satisfy my search. Following the previous example, let's say that I also want to find the total
+Maybe we want to generate groups that span more than one column, to satisfy my search. Following the previous example, let's say that I also want to find the total number of films for each film rating, for each actor.
+We could modify our query:
+SELECT fa.actor_id, f.rating, count(*)
+FROM film_actor fa
+INNER JOIN film f
+    ON fa.film_id = f.film_id
+GROUP BY fa.actor_id, f.rating
+ORDER BY 1,2;
 
-Finally, the choice between single and multiple column grouping is all about how detailed you want your analysis to be. Single column grouping gives a high-level view, while multiple column grouping offers a more detailed look by considering combinations of attributes.
+- Now we got our desired result. Notice how we have to grouping condition in the GROUP BY clause, actor and rating.
+
+The choice between single and multiple column grouping is all about how detailed we want our analysis to be. Single column grouping gives a high-level view, while multiple column grouping offers a more detailed look by considering combinations of attributes.
