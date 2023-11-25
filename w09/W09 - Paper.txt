@@ -1,1 +1,79 @@
-asd
+Starting with left and right joins, it is crucial to understand their different functionalities in returning result sets. Specifically, a left join encompasses all records from the left table alongside any matching records from the right table. On the other side, a right join retrieves all records from the right table, complemented by matching entries from the left table.
+
+Example:
+SELECT first_name, store.store_id
+FROM store
+LEFT JOIN staff
+ON store.store_id = staff.store_id;
+- In this example, we are retrieving all members of the staff with their store.
+
+Let's say that for any reason, there are staff members that aren't associated with any store. In this case, we can use OUTER JOINS, which essentially makes the join condition optional.
+
+Example:
+SELECT first_name, store.store_id
+FROM store
+LEFT OUTER JOIN staff
+ON store.store_id = staff.store_id;
+
+- In this example, the staff member without a store would show up but the store_id will be NULL. We can achieve the same result using a combination of LEFT JOINS:
+SELECT first_name, store.store_id, staff.address_id
+FROM store
+LEFT JOIN staff
+ON store.store_id = staff.store_id
+LEFT JOIN address a
+ON staff.address_id = a.address_id;
+
+- In this example, I added a join condition to the address table, to demonstrate how we can combine different left joins in order to achieve the same result.
+
+To better understand the concept of cross joins, consider two tables—one with colors (red, green, blue) and another with sizes (small, medium, large). A cross join would combine every color with every size, giving you a comprehensive list of color-size combinations: red-small, red-medium, red-large, green-small, and so on.
+Using an example from the sakila database to retrieve rentals per day:
+SELECT days.dt, COUNT(r.rental_id) num_rentals
+FROM rental r
+RIGHT OUTER JOIN
+(SELECT DATE_ADD('2005-01-01',
+INTERVAL (ones.num + tens.num + hundreds.num) DAY) dt
+FROM
+(SELECT 0 num UNION ALL
+SELECT 1 num UNION ALL
+SELECT 2 num UNION ALL
+SELECT 3 num UNION ALL
+SELECT 4 num UNION ALL
+SELECT 5 num UNION ALL
+SELECT 6 num UNION ALL
+SELECT 7 num UNION ALL
+SELECT 8 num UNION ALL
+SELECT 9 num) ones
+CROSS JOIN
+(SELECT 0 num UNION ALL
+SELECT 10 num UNION ALL
+SELECT 20 num UNION ALL
+SELECT 30 num UNION ALL
+SELECT 40 num UNION ALL
+SELECT 50 num UNION ALL
+SELECT 60 num UNION ALL
+SELECT 70 num UNION ALL
+SELECT 80 num UNION ALL
+SELECT 90 num) tens
+CROSS JOIN
+(SELECT 0 num UNION ALL
+SELECT 100 num UNION ALL
+SELECT 200 num UNION ALL
+SELECT 300 num) hundreds
+WHERE DATE_ADD('2005-01-01',
+INTERVAL(ones.num + tens.num + hundreds.num) DAY) 
+< '2006-01-01'
+) days
+ON days.dt = date(r.rental_date)
+GROUP BY days.dt
+ORDER BY 1;
+
+Lastly, the natural join leans on existing column names for its functionality. This type of join automatically identifies and returns records where column names align, providing an efficient means to join tables based on shared attributes.
+Using a sakila database example:
+SELECT cust.first_name, cust.last_name, date(r.rental_date)
+FROM
+(SELECT customer_id, first_name, last_name
+FROM customer
+) cust
+NATURAL JOIN rental r;
+
+
